@@ -48,7 +48,8 @@
         background-color: #9a4f5c;
       }
 
-      .schedule {
+      .schedule,
+      .no-message {
         max-width: 600px;
         margin: 40px auto;
         background-color: #fff5f7;
@@ -56,11 +57,15 @@
         border-radius: 20px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         display: none;
+        opacity: 0;
+        animation: fadeIn 1s forwards;
       }
 
-      .schedule h2 {
+      .schedule h2,
+      .no-message h2 {
         color: #b36c75;
         margin-bottom: 1rem;
+        text-align: center;
       }
 
       .schedule ul {
@@ -74,21 +79,25 @@
         color: #6b3e4a;
       }
 
-      #noMessage {
-        display: none;
+      .no-message p {
         text-align: center;
-        margin: 2rem auto;
-        color: #b36c75;
-        font-size: 1.2rem;
-        max-width: 600px;
+        color: #6b3e4a;
+        font-size: 1.1rem;
+        margin-top: 0.5rem;
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
       }
     </style>
   </head>
   <body>
     <div class="invite-container">
       <img
-        src="https://drive.google.com/thumbnail?id=13xeu3TMGxUg6kBc1bez_o1Ydw2V4MwH5&sz=w2000"
-        alt="Natalie's Romantic Birthday Invitation"
+        src="https://drive.google.com/thumbnail?id=1riKnG7XUg3bOYddd5hUGdQYaPAnfKxUt&sz=w2000"
+        alt="Natalie Birthday Invite"
       />
       <div class="button-container">
         <a href="#" onclick="event.preventDefault(); showSchedule()">Yes</a>
@@ -122,15 +131,18 @@
       </ul>
     </div>
 
-    <div id="noMessage">
-      Oops... looks like you accidentally clicked the wrong button.<br /><br />
-      Go on... try again. I’ll pretend I didn’t see it 😉
+    <div class="no-message" id="no-message">
+      <h2>Oops... 😳</h2>
+      <p>
+        Looks like you accidentally clicked the wrong button.<br /><br />
+        Go on... try again. I’ll pretend I didn’t see it 😉
+      </p>
     </div>
 
     <script>
       function showSchedule() {
         document.getElementById("schedule").style.display = "block";
-        document.getElementById("noMessage").style.display = "none";
+        document.getElementById("no-message").style.display = "none";
         window.scrollTo({
           top: document.getElementById("schedule").offsetTop,
           behavior: "smooth",
@@ -138,10 +150,10 @@
       }
 
       function showNoMessage() {
+        document.getElementById("no-message").style.display = "block";
         document.getElementById("schedule").style.display = "none";
-        document.getElementById("noMessage").style.display = "block";
         window.scrollTo({
-          top: document.getElementById("noMessage").offsetTop,
+          top: document.getElementById("no-message").offsetTop,
           behavior: "smooth",
         });
       }

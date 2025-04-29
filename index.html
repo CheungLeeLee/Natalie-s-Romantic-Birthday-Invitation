@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Natalie's Birthday Invitation</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ctext%20y%3D%22.9em%22%20font-size%3D%2290%22%3E%F0%9F%8E%82%3C%2Ftext%3E%3C%2Fsvg%3E"
+      type="image/svg+xml"
+    />
     <style>
       body {
         margin: 0;
@@ -23,6 +28,8 @@
         width: 100%;
         border-radius: 20px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        animation: fadeInImage 1.5s ease-in-out forwards;
       }
 
       .button-container {
@@ -91,6 +98,17 @@
           opacity: 1;
         }
       }
+
+      @keyframes fadeInImage {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
     </style>
   </head>
   <body>
@@ -109,16 +127,17 @@
       <h2>Your Birthday Adventure ✨</h2>
       <ul>
         <li>
-          <strong>10:30 AM:</strong> Something awaits outside — your ride into a
+          <strong>12:00 AM:</strong> Something awaits outside — your ride into a
           day full of adventure 🌷
         </li>
         <li>
-          <strong>11:00 AM:</strong> A cozy experience in nature — just us,
-          snacks, and something a little artistic 🎨
+          <strong>12:30 PM :</strong> Fresh air, laughter, flavors, and something a little artistic 🎨
         </li>
         <li>
-          <strong>6:30 PM:</strong> Time to get dressed up for a taste of
-          elegance 🥂
+          <strong>4:00 PM:</strong> A thrilling detour — you’ll need your sharpest instincts for this one 🔍
+        </li>
+        <li>
+          <strong>6:30 PM:</strong> Dress to impress — an elegant table is waiting for you 🥂
         </li>
         <li>
           <strong>9:00 PM:</strong> A dreamy atmosphere and a toast to you at a

@@ -93,6 +93,57 @@
         margin-top: 0.5rem;
       }
 
+      /* Countdown Timer Styles */
+      .countdown-container {
+        max-width: 600px;
+        margin: 30px auto 0;
+        background-color: #fff5f7;
+        padding: 1.5rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        opacity: 0;
+        animation: fadeIn 1.5s 0.5s forwards;
+      }
+
+      .countdown-title {
+        color: #b36c75;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+      }
+
+      .countdown-timer {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .countdown-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .countdown-value {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #6b3e4a;
+        background-color: white;
+        width: 70px;
+        height: 70px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .countdown-label {
+        margin-top: 8px;
+        color: #b36c75;
+        font-size: 0.9rem;
+      }
+
       @keyframes fadeIn {
         to {
           opacity: 1;
@@ -109,6 +160,23 @@
           transform: translateY(0);
         }
       }
+
+      /* Mobile responsiveness */
+      @media (max-width: 500px) {
+        .countdown-timer {
+          gap: 10px;
+        }
+
+        .countdown-value {
+          width: 60px;
+          height: 60px;
+          font-size: 1.5rem;
+        }
+
+        .countdown-label {
+          font-size: 0.8rem;
+        }
+      }
     </style>
   </head>
   <body>
@@ -120,6 +188,29 @@
       <div class="button-container">
         <a href="#" onclick="event.preventDefault(); showSchedule()">Yes</a>
         <a href="#" onclick="event.preventDefault(); showNoMessage()">No</a>
+      </div>
+    </div>
+
+    <!-- Countdown Timer Section -->
+    <div class="countdown-container">
+      <div class="countdown-title">Birthday Countdown!</div>
+      <div class="countdown-timer">
+        <div class="countdown-box">
+          <div class="countdown-value" id="days">00</div>
+          <div class="countdown-label">Days</div>
+        </div>
+        <div class="countdown-box">
+          <div class="countdown-value" id="hours">00</div>
+          <div class="countdown-label">Hours</div>
+        </div>
+        <div class="countdown-box">
+          <div class="countdown-value" id="minutes">00</div>
+          <div class="countdown-label">Minutes</div>
+        </div>
+        <div class="countdown-box">
+          <div class="countdown-value" id="seconds">00</div>
+          <div class="countdown-label">Seconds</div>
+        </div>
       </div>
     </div>
 
@@ -135,7 +226,7 @@
           something a little artistic 🎨
         </li>
         <li>
-          <strong>4:00 PM:</strong> A thrilling detour — you’ll need your
+          <strong>4:00 PM:</strong> A thrilling detour — you'll need your
           sharpest instincts for this one 🔍
         </li>
         <li>
@@ -157,11 +248,53 @@
       <h2>Oops...</h2>
       <p>
         Looks like you accidentally clicked the wrong button.<br /><br />
-        Go on... try again. I’ll pretend I didn’t see it 😉
+        Go on... try again. I'll pretend I didn't see it 😉
       </p>
     </div>
 
     <script>
+      // Set the date we're counting down to (Change this to Natalie's actual birthday)
+      // Format: Year, Month (0-11), Day, Hour, Minute, Second
+      const birthdayDate = new Date(2025, 4, 10, 0, 0, 0).getTime();
+
+      // Update the countdown every 1 second
+      const countdownTimer = setInterval(function () {
+        // Get today's date and time
+        const now = new Date().getTime();
+
+        // Find the distance between now and the birthday date
+        const distance = birthdayDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Display the results
+        document.getElementById("days").innerHTML =
+          days < 10 ? "0" + days : days;
+        document.getElementById("hours").innerHTML =
+          hours < 10 ? "0" + hours : hours;
+        document.getElementById("minutes").innerHTML =
+          minutes < 10 ? "0" + minutes : minutes;
+        document.getElementById("seconds").innerHTML =
+          seconds < 10 ? "0" + seconds : seconds;
+
+        // If the countdown is finished, display a message
+        if (distance < 0) {
+          clearInterval(countdownTimer);
+          document.querySelector(".countdown-title").innerHTML =
+            "Today is the day! 🎉";
+          document.getElementById("days").innerHTML = "00";
+          document.getElementById("hours").innerHTML = "00";
+          document.getElementById("minutes").innerHTML = "00";
+          document.getElementById("seconds").innerHTML = "00";
+        }
+      }, 1000);
+
       function showSchedule() {
         document.getElementById("schedule").style.display = "block";
         document.getElementById("no-message").style.display = "none";
